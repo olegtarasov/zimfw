@@ -46,14 +46,14 @@ Installing Zim is easy. If you have a different shell framework installed (like 
 
 2. Clone the repository:
 
-       git clone --recursive https://github.com/zimfw/zimfw.git ${ZDOTDIR:-${HOME}}/.zim
+       git clone --recursive https://github.com/olegtarasov/zimfw.git ${ZDOTDIR:-${HOME}}/.zim
 
 3. Paste this into your terminal to prepend the initialization templates to your configs:
 
-       for template_file in ${ZDOTDIR:-${HOME}}/.zim/templates/*; do
-         user_file="${ZDOTDIR:-${HOME}}/.${template_file:t}"
-         cat ${template_file} ${user_file}(.N) > ${user_file}.tmp && mv ${user_file}{.tmp,}
-       done
+        setopt EXTENDED_GLOB
+        for rcfile in "${ZDOTDIR:-$HOME}"/.zim/config/^README.md(.N); do
+          ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+        done
 
 4. Set Zsh as the default shell:
 
